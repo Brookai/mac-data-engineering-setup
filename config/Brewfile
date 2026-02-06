@@ -1,0 +1,38 @@
+# Data Engineering - Homebrew Packages
+# Version strategy: Latest stable
+
+# Package Management
+brew "git"
+
+# Cloud & Infrastructure
+brew "awscli"
+brew "terraform"
+brew "kubectl"
+brew "helm"
+brew "ansible"
+
+# Data Tools
+brew "duckdb"
+brew "postgresql@16"
+brew "jq"
+brew "rclone"
+
+# Data Platform
+tap "huseyinbabal/tap"
+brew "huseyinbabal/tap/taws"
+brew "snowflake-cli"
+
+# Development
+brew "node"
+brew "uv"
+brew "python@3.13"
+brew "tree"
+brew "coreutils"
+brew "gh"
+
+# Casks
+cask "claude"
+cask "github"
+cask "iterm2"
+cask "snowflake-snowsql"
+cask "visual-studio-code"
