@@ -25,7 +25,7 @@ Opinionated Mac setup for data engineering at Brook AI with Claude-guided instal
 
 ```bash
 cd ~/Repos  # or your preferred location
-git clone https://github.com/brook-ai/mac-data-engineering-setup.git
+git clone https://github.com/Brookai/mac-data-engineering-setup.git
 cd mac-data-engineering-setup
 ```
 
@@ -339,7 +339,7 @@ cat .state/install.state     # View progress
 
 **Team Support:**
 - Slack: #data-engineering
-- Repository: https://github.com/brook-ai/mac-data-engineering-setup
+- Repository: https://github.com/Brookai/mac-data-engineering-setup
 
 ---
 

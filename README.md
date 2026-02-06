@@ -6,7 +6,7 @@ Opinionated Mac setup for data engineering with Claude-guided installation assis
 
 ```bash
 # Clone repository
-git clone https://github.com/brook-ai/mac-data-engineering-setup.git
+git clone https://github.com/Brookai/mac-data-engineering-setup.git
 cd mac-data-engineering-setup
 
 # Run setup
@@ -15,6 +15,177 @@ cd mac-data-engineering-setup
 # Verify installation
 ./verify.sh
 ```
+
+## Local Testing
+
+Before deploying to team, test the setup:
+
+### 1. Dry Run (Recommended First Step)
+
+```bash
+cd ~/mac-data-engineering-setup
+
+# Check what's currently installed
+./verify.sh
+
+# Test without installing anything
+./setup.sh --verify-only
+```
+
+### 2. Test Individual Components
+
+```bash
+# Test Brewfile syntax
+brew bundle check --file=config/Brewfile
+
+# Test shell scripts
+shellcheck setup.sh verify.sh refresh.sh lib/*.sh
+
+# Test state management
+cat .state/install.state  # if exists from previous run
+```
+
+### 3. Full Installation Test
+
+**Option A: On your current machine (safe - skips already installed)**
+```bash
+./setup.sh
+```
+This is safe because:
+- Idempotent (won't reinstall existing packages)
+- State tracking prevents duplicate work
+- Can resume if interrupted
+
+**Option B: Fresh environment (recommended for validation)**
+
+Create test user account:
+```bash
+# Create test user
+sudo dscl . -create /Users/testuser
+sudo dscl . -create /Users/testuser UserShell /bin/zsh
+sudo dscl . -create /Users/testuser RealName "Test User"
+sudo dscl . -create /Users/testuser UniqueID 1001
+sudo dscl . -create /Users/testuser PrimaryGroupID 20
+sudo dscl . -create /Users/testuser NFSHomeDirectory /Users/testuser
+sudo dscl . -passwd /Users/testuser testpass
+
+# Create home directory
+sudo createhomedir -c -u testuser
+
+# Switch to test user, clone repo, run setup
+# When done, delete: sudo dscl . -delete /Users/testuser
+```
+
+Or use VM:
+- UTM (free): https://mac.getutm.app/
+- Parallels Desktop
+- VMware Fusion
+
+### 4. Test Resume Capability
+
+```bash
+# Start installation
+./setup.sh
+
+# Interrupt with Ctrl+C during a phase
+
+# Resume
+./setup.sh --resume
+
+# Verify state tracking
+cat .state/install.state
+```
+
+### 5. Test Error Handling
+
+```bash
+# Intentionally cause error (e.g., bad package name)
+echo 'brew "nonexistent-package-xyz"' >> config/Brewfile
+
+# Run setup - should offer Claude help or skip
+./setup.sh
+
+# Restore Brewfile
+git checkout config/Brewfile
+```
+
+### 6. Test Update Workflow
+
+```bash
+# Make a change
+echo '# Test comment' >> config/Brewfile
+
+# Commit change
+git add config/Brewfile
+git commit -m "test: add comment"
+
+# Test refresh
+./refresh.sh
+
+# Should pull changes and update packages
+```
+
+### 7. Verify Documentation
+
+Check all documentation:
+```bash
+# Verify links work
+grep -r "http" *.md docs/
+
+# Check code blocks have language tags
+grep -r '```$' *.md docs/
+
+# Verify examples are accurate
+# Manually review each .md file
+```
+
+### 8. Test on Colleague's Machine (Optional)
+
+Ask a teammate to:
+1. Clone the repo
+2. Run `./setup.sh`
+3. Report any errors or unclear steps
+4. Verify their environment works
+
+### Common Test Scenarios
+
+**Scenario 1: Fresh macOS**
+- Clone repo
+- Run setup.sh
+- Verify all 47 packages install
+- Test each service (AWS, Snowflake, GitHub)
+
+**Scenario 2: Partially configured Mac**
+- Some tools already installed
+- Run setup.sh
+- Verify it skips installed packages
+- Completes missing installations
+
+**Scenario 3: Interrupted installation**
+- Start setup.sh
+- Cancel mid-way (Ctrl+C)
+- Run setup.sh --resume
+- Verify it continues from checkpoint
+
+**Scenario 4: Failed package installation**
+- Introduce error (bad package name)
+- Run setup.sh
+- Verify error handling and Claude help
+- Fix and complete installation
+
+### Validation Checklist
+
+Before pushing to GitHub:
+- [ ] `./verify.sh` passes 100%
+- [ ] All shell scripts pass `shellcheck`
+- [ ] Brewfile validates with `brew bundle check`
+- [ ] Documentation links work
+- [ ] Code examples are accurate
+- [ ] Tested on fresh environment or test user
+- [ ] Resume capability works
+- [ ] Error handling provides helpful guidance
+- [ ] No hardcoded credentials or secrets
+- [ ] .gitignore excludes generated files
 
 ## What Gets Installed
 
@@ -196,6 +367,7 @@ mac-data-engineering-setup/
 
 ## Links
 
+- [Repository](https://github.com/Brookai/mac-data-engineering-setup)
 - [Brook AI Internal Docs](https://www.notion.so)
 - [Troubleshooting Guide](TROUBLESHOOTING.md)
 - [Post-Install Configuration](POST_INSTALL.md)

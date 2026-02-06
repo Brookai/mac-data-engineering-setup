@@ -657,4 +657,4 @@ git push origin team/data-engineering
 
 **Support:**
 - Slack: #data-engineering
-- GitHub: https://github.com/brook-ai/mac-data-engineering-setup
+- GitHub: https://github.com/Brookai/mac-data-engineering-setup
