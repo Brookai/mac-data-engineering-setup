@@ -77,8 +77,7 @@ source ~/.zshrc
 
 ## What Gets Installed
 
-<details>
-<summary><strong>Data Platform & Cloud (7 packages)</strong></summary>
+### Data Platform & Cloud (7 packages)
 
 - **awscli** - AWS command line interface
 - **snowflake-cli** - Modern Snowflake CLI
@@ -88,37 +87,25 @@ source ~/.zshrc
 - **rclone** - Cloud storage sync
 - **taws** - AWS session management helper
 
-</details>
-
-<details>
-<summary><strong>Data Tools (3 packages)</strong></summary>
+### Data Tools (3 packages)
 
 - **duckdb** - In-process analytical database
 - **postgresql@16** - Local Postgres for development
 - **jq** - JSON processor (essential for AWS/API work)
 
-</details>
-
-<details>
-<summary><strong>Kubernetes & Containers (3 packages)</strong></summary>
+### Kubernetes & Containers (3 packages)
 
 - **kubectl** - Kubernetes command line
 - **helm** - Kubernetes package manager
 - **Docker Desktop** - Container runtime (manual install required)
 
-</details>
-
-<details>
-<summary><strong>Python Ecosystem (3 packages)</strong></summary>
+### Python Ecosystem (3 packages)
 
 - **python@3.13** - Latest Python version
 - **uv** - Fast Python package manager
 - **ruff** - Python linter & formatter (installed via uv)
 
-</details>
-
-<details>
-<summary><strong>Development Tools (5 packages)</strong></summary>
+### Development Tools (5 packages)
 
 - **git** - Version control
 - **gh** - GitHub CLI
@@ -126,10 +113,7 @@ source ~/.zshrc
 - **tree** - Directory visualization
 - **coreutils** - GNU utilities
 
-</details>
-
-<details>
-<summary><strong>Applications (5 casks)</strong></summary>
+### Applications (5 casks)
 
 - **Claude** - AI assistant
 - **VS Code** - Code editor
@@ -137,10 +121,7 @@ source ~/.zshrc
 - **GitHub Desktop** - Git GUI
 - **SnowSQL** - Snowflake GUI
 
-</details>
-
-<details>
-<summary><strong>Additional Packages</strong></summary>
+### Additional Packages
 
 **npm global (3):**
 - markdownlint-cli2
@@ -150,10 +131,8 @@ source ~/.zshrc
 **uv tools (1):**
 - ruff
 
-**VS Code extensions (21):**
+**VS Code extensions (22):**
 Python, Go, Rust, Kubernetes, Docker, MongoDB, AWS, YAML, and more
-
-</details>
 
 ---
 
@@ -249,10 +228,7 @@ gh repo clone brook-ai/dagster-pipelines
 
 ## Troubleshooting
 
-Common issues and solutions:
-
-<details>
-<summary><strong>Homebrew Installation Fails</strong></summary>
+### Homebrew Installation Fails
 
 ```bash
 # Check network connection
@@ -264,10 +240,7 @@ networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
 # Disable VPN temporarily
 ```
 
-</details>
-
-<details>
-<summary><strong>npm Permission Errors</strong></summary>
+### npm Permission Errors
 
 ```bash
 # Fix npm permissions
@@ -277,20 +250,14 @@ echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-</details>
-
-<details>
-<summary><strong>VS Code 'code' Command Not Found</strong></summary>
+### VS Code 'code' Command Not Found
 
 1. Open VS Code
 2. Press Cmd+Shift+P
 3. Type "Shell Command: Install 'code' command in PATH"
 4. Select and run
 
-</details>
-
-<details>
-<summary><strong>Installation Hangs</strong></summary>
+### Installation Hangs
 
 ```bash
 # Check logs
@@ -300,8 +267,6 @@ tail -f setup.log
 # Press Ctrl+C
 ./setup.sh --resume
 ```
-
-</details>
 
 For more issues, see [TROUBLESHOOTING.md](../../TROUBLESHOOTING.md)
 
